@@ -1,0 +1,19 @@
+.nav{
+    float:left;
+    width: 100%;
+}
+
+.title{
+    font-size: 150px;
+    text-align: center;
+}
+
+#itemArea{
+    float: left;
+    width: 100%;
+}
+
+
+.image{
+    height: 300px;
+}
