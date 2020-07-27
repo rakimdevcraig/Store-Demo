@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const newItem = new Item({
+        image: req.body.image,
         name: req.body.name,
         price: req.body.price,
         quantity: req.body.quantity

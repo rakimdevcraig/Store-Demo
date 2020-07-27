@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Inventory</title>
+    <link rel="stylesheet" href="css/inventory.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,16 +13,26 @@
 <body>
     <div class="container">
         <form id="addItem">
+            <div>
+                <h1 id="title">Add Item to inventory</h1>
+            </div>
             <div class="form-group">
+                <h1>Image Link</h1>
+                <input type="text" id="image" class="form-control" placeholder="Image Link">
+            </div>
+            <div class="form-group">
+                <h1>Item Name</h1>
                 <input type="text" id="name" class="form-control" placeholder="Name">
             </div>
             <div class="form-group">
+                <h1>Item price</h1>
                 <input type="text" id="price" class="form-control" placeholder="Price">
             </div>
             <div class="form-group">
+                <h1>Quantity</h1>
                 <input type="text" id="quantity" class="form-control" placeholder="Quantity">
             </div>
-            <input type="submit" class="btn btn-secondary" value="Submit">
+            <input type="submit" class="btn btn-primary" value="Submit">
         </form>
     </div>
 </body>

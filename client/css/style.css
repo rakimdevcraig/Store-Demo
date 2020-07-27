@@ -12,3 +12,13 @@
     float: left;
     width: 100%;
 }
+
+.img-fluid {
+    max-width: 40%;
+}
+
+.card-body {
+    width: 30%;
+    float: left;
+    margin-left: 25px;
+}
