@@ -6,7 +6,7 @@ function getPosts() {
             data.forEach(function (post) {
                 output += `
                 <div class="card card-body mb-3 bg-light">
-                <img class="img-fluid" src="${post.image}">
+                <img class="img-fluid" src="${post.productImage}">
                 <h3>Item Name: ${post.name}</h3>
                 <h3>Item Price: ${post.price}</h3>
                 <h3>Item Quantity: ${post.quantity}</h3>
