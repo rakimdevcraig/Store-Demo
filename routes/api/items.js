@@ -6,6 +6,9 @@ const multer = require('multer')
 //Item Model
 const Item = require('../../models/Item');
 
+//Cart Model
+const Cart = require('../../models/Cart')
+
 //Storage for multer will determine where files are stored and filename 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -46,6 +49,13 @@ router.get('/api/items', (req, res) => {
         .then(items => res.json(items))
 });
 
+//Route  GET api/items
+//description: Get All Cart Items from db in json
+router.get('/api/cart', (req, res) => {
+    Cart.find()
+        .then(items => res.json(items))
+})
+
 router.get('/', (req, res) => {
     res.sendFile(publicPath + '/index.html');
 })
@@ -54,15 +64,19 @@ router.get('/inventory', function (req, res) {
     res.sendFile(publicPath + '/inventory.html');
 });
 
+router.get('/cart', (req, res) => {
+    res.sendFile(publicPath + '/cart.html');
+})
+
 
 //route post request to api/items
 //description post an item
 //access: public but for real app will be private we only want admins to be able to post
 
-router.post('/api/items', upload.single('productImage'), (req, res) => {
+router.post('/api/items', upload.single('productPicture'), (req, res) => {
     console.log(req.file)
     const newItem = new Item({
-        productImage: req.file.filename,
+        productPicture: req.file.filename,
         name: req.body.name,
         price: req.body.price,
         quantity: req.body.quantity
@@ -71,5 +85,40 @@ router.post('/api/items', upload.single('productImage'), (req, res) => {
     newItem.save().then(item => res.json(item))
 })
 
+
+//Add item to cart
+router.post('/api/cart', (req, res) => {
+    //gonna check if a cart exists because we only want to have 1 cart
+    console.log('Req.id', req._id)
+    Cart.findOne({ user: req._id })
+        .exec((error, cart) => {
+            if (error) return res.status(400).json({ error })
+            if (cart) {
+                //if cart already exists then update
+                Cart.findOneAndUpdate({ user: req._id }, { useFindAndModify: false }, {
+                    "$push": {
+                        "cartItems": [req.body.cartItems]
+                    }
+                })
+                    .exec((error, _cart) => {
+                        if (error) return res.status(400).json({ error })
+                        if (_cart) {
+                            return res.status(201).json({ cart: _cart })
+                        }
+                    })
+            } else {
+                const cart = new Cart({
+                    cartItems: [req.body.cartItems]
+                })
+
+                cart.save((error, cart) => {
+                    if (error) return res.status(400).json({ error })
+                    if (cart) {
+                        return res.status(201).json({ cart })
+                    }
+                })
+            }
+        })
+})
 
 module.exports = router;
