@@ -5,7 +5,6 @@ function displayCart() {
             let cart = data[0].cartItems
             let output = ''
             cart.forEach(function (item) {
-                console.log(item)
                 output += `
                 <tr>
                 <td width="60"><img src="${item.productPicture}" height="80" /></td>

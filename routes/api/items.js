@@ -95,7 +95,7 @@ router.post('/api/cart', (req, res) => {
             if (error) return res.status(400).json({ error })
             if (cart) {
                 //if cart already exists then update
-                Cart.findOneAndUpdate({ user: req._id }, { useFindAndModify: false }, {
+                Cart.findOneAndUpdate({ user: req._id }, {
                     "$push": {
                         "cartItems": [req.body.cartItems]
                     }
